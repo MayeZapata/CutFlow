@@ -4,6 +4,7 @@ import { useState } from 'react';
 import BenchmarkChart from '@/components/ui/BenchmarkChart';
 import KpiCard from '@/components/ui/KpiCard';
 import StressAiAssistant from './StressAiAssistant';
+import NpLab from './NpLab';
 
 interface StressResult {
   volume: number;
@@ -30,6 +31,7 @@ function isStressResult(data: unknown): data is StressResult {
 }
 
 export default function StressLab() {
+  const [labMode, setLabMode] = useState<'p-benchmark' | 'np-problems'>('p-benchmark');
   const [volume, setVolume] = useState<number>(10000);
   const [result, setResult] = useState<StressResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -69,15 +71,48 @@ export default function StressLab() {
 
   return (
     <section aria-labelledby="stress-title" className="card space-y-6 p-5 sm:p-8">
-      <header>
-        <p className="eyebrow">Monitoreo y Rendimiento</p>
-        <h2 id="stress-title" className="mt-1 font-display text-2xl font-semibold">
-          Laboratorio de estrés de algoritmos
-        </h2>
-        <p className="mt-1 text-sm text-muted">
-          Ejecuta en tiempo real sobre Node.js la comparación del motor de intervalos $O(n \log n)$ contra la búsqueda ingenua $O(n^2)$, tomando citas base reales desde MongoDB.
-        </p>
-      </header>
+      {/* Selector de Modo Principal: P vs NP */}
+      <div className="flex flex-wrap gap-2 border-b border-line pb-4">
+        <button
+          type="button"
+          onClick={() => setLabMode('p-benchmark')}
+          className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition ${
+            labMode === 'p-benchmark'
+              ? 'bg-gold text-night shadow-md shadow-gold/20'
+              : 'border border-line bg-surface-2/60 text-muted hover:border-gold/40 hover:text-cream'
+          }`}
+        >
+          <span>⚡</span>
+          <span>Motor P: Intervalos (O(n log n) vs O(n²))</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setLabMode('np-problems')}
+          className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition ${
+            labMode === 'np-problems'
+              ? 'bg-gold text-night shadow-md shadow-gold/20'
+              : 'border border-line bg-surface-2/60 text-muted hover:border-gold/40 hover:text-cream'
+          }`}
+        >
+          <span>🧩</span>
+          <span>Problemas NP y NP-Completos (Subset Sum & 3-Coloring)</span>
+        </button>
+      </div>
+
+      {labMode === 'np-problems' ? (
+        <NpLab />
+      ) : (
+        <>
+          <header>
+            <p className="eyebrow">Monitoreo y Rendimiento</p>
+            <h2 id="stress-title" className="mt-1 font-display text-2xl font-semibold">
+              Laboratorio de estrés de algoritmos
+            </h2>
+            <p className="mt-1 text-sm text-muted">
+              Ejecuta en tiempo real sobre Node.js la comparación del motor de intervalos $O(n \log n)$ contra la búsqueda ingenua $O(n^2)$, tomando citas base reales desde MongoDB.
+            </p>
+          </header>
 
       {/* Selector de volumen dinámico: personalizable hasta 1.000.000 de solicitudes */}
       <div className="flex flex-col gap-3">
@@ -232,6 +267,8 @@ export default function StressLab() {
           </div>
         </div>
       </div>
+        </>
+      )}
     </section>
   );
 }
