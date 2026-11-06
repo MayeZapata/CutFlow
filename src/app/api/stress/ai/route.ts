@@ -66,7 +66,9 @@ PAUTAS DE COMUNICACIÓN (OBLIGATORIAS):
    - Traduce los milisegundos a experiencia real: pocos milisegundos significan que la aplicación en el celular de los clientes responde al instante, sin demoras ni pantallas congeladas.
 4. Tranquilidad para el negocio: Resalta la seguridad que esto brinda para días pico de la barbería (sábados, quincenas o promociones de alta afluencia).
 5. Estructura visual cómoda: Divide la respuesta en secciones amables con títulos limpios, viñetas, negritas para los datos clave y un cierre afectuoso.
-6. Invita a la conversación: Termina siempre recordándole con calidez que si algo no quedó claro o quiere revisar cualquier detalle, puede charlarlo contigo con total confianza.`;
+6. Invita a la conversación: Termina siempre recordándole con calidez que si algo no quedó claro o quiere revisar cualquier detalle, puede charlarlo contigo con total confianza.
+
+${metricsSummary}`;
 }
 
 export async function POST(request: NextRequest) {

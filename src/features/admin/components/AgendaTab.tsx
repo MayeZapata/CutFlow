@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Appointment, Barber, Service } from '@/types/domain';
 import { ClockIcon, ScissorsIcon, AlertIcon } from '@/components/ui/icons';
 import { formatCop } from '@/utils/time';
@@ -55,14 +55,8 @@ export default function AgendaTab({
   });
 
   const totalPages = Math.max(1, Math.ceil(filteredAppointments.length / pageSize));
-
-  // Keep currentPage within bounds when filters or pageSize change
-  useEffect(() => {
-    const maxPage = Math.max(1, Math.ceil(filteredAppointments.length / pageSize));
-    if (currentPage > maxPage) {
-      setCurrentPage(maxPage);
-    }
-  }, [filteredAppointments.length, pageSize, currentPage]);
+  // Keep the page within bounds when filters or data change (derived, no effect needed)
+  const safePage = Math.min(currentPage, totalPages);
 
   function handleSelectBarber(id: string) {
     onSelectBarberId(id);
@@ -75,8 +69,8 @@ export default function AgendaTab({
   }
 
   const paginatedAppointments = filteredAppointments.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
+    (safePage - 1) * pageSize,
+    safePage * pageSize
   );
 
   function getBarberName(id: string) {
@@ -334,7 +328,7 @@ export default function AgendaTab({
 
           {/* Pagination Controls */}
           <Pagination
-            currentPage={currentPage}
+            currentPage={safePage}
             totalPages={totalPages}
             totalItems={filteredAppointments.length}
             pageSize={pageSize}

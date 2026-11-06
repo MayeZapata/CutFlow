@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Barber, Location } from '@/types/domain';
 import { StarIcon, AlertIcon } from '@/components/ui/icons';
 
@@ -15,16 +15,13 @@ export default function BarbersTab({ barbers, locationId, locations = [], onRefr
   const [isAdding, setIsAdding] = useState(false);
   const [name, setName] = useState('');
   const [specialty, setSpecialty] = useState('');
-  const [targetLocationId, setTargetLocationId] = useState(locationId);
   const [rating, setRating] = useState('5.0');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
-
-  // Sync target location when selected branch changes
-  useEffect(() => {
-    setTargetLocationId(locationId);
-  }, [locationId]);
+  // null = not changed by the admin yet; defaults to the current location.
+  const [pickedLocationId, setTargetLocationId] = useState<string | null>(null);
+  const targetLocationId = pickedLocationId ?? locationId;
 
   async function handleAddBarber(e: React.FormEvent) {
     e.preventDefault();

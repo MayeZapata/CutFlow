@@ -30,7 +30,8 @@ export default function BookingPanel() {
   const [services, setServices] = useState<Service[]>(() => [...SERVICES]);
   const [barberId, setBarberId] = useState('');
   const [serviceId, setServiceId] = useState(SERVICES[1]?.id || '');
-  const [customerName, setCustomerName] = useState('');
+  // null = the user has not typed yet; falls back to the authenticated user's name.
+  const [customerNameInput, setCustomerName] = useState<string | null>(null);
   const today = useTodayIsoDate();
   // Empty until the user picks a date; falls back to today.
   const [pickedDate, setPickedDate] = useState('');
@@ -43,12 +44,7 @@ export default function BookingPanel() {
   const { user } = useAuth();
   const router = useRouter();
 
-  // Prefill customer name if authenticated
-  useEffect(() => {
-    if (user?.name && !customerName) {
-      setCustomerName(user.name);
-    }
-  }, [user, customerName]);
+  const customerName = customerNameInput ?? user?.name ?? '';
 
   // Load locations dynamically from database
   useEffect(() => {
@@ -89,7 +85,6 @@ export default function BookingPanel() {
   // Load barbers dynamically from database whenever locationId changes
   useEffect(() => {
     let isMounted = true;
-    setBarbersLoading(true);
     fetch(`/api/barbers?locationId=${locationId}&onlyActive=true`)
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
@@ -116,19 +111,15 @@ export default function BookingPanel() {
     };
   }, [locationId]);
 
-  // Reset barberId if it is no longer valid in the newly loaded list
-  useEffect(() => {
-    if (barberId && !barbers.some((b) => b.id === barberId)) {
-      setBarberId('');
-    }
-  }, [barbers, barberId]);
-
   const location = locations.find((item) => item.id === locationId);
+  // A barberId that is not in the loaded list simply resolves to undefined (no reset effect needed)
   const barber = barbers.find((item) => item.id === barberId);
   const service = services.find((item) => item.id === serviceId);
   const endTime = startTime && service ? addMinutesToTime(startTime, service.durationMinutes) : '';
 
   function handleLocationSelect(nextLocationId: string) {
+    if (nextLocationId === locationId) return;
+    setBarbersLoading(true);
     setLocationId(nextLocationId);
     setBarberId('');
   }

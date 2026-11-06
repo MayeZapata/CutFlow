@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import KpiCard from '@/components/ui/KpiCard';
-import { AlertIcon, CheckIcon, MapPinIcon } from '@/components/ui/icons';
+import { AlertIcon, MapPinIcon } from '@/components/ui/icons';
 
 interface SuperadminStats {
   connected: boolean;
@@ -28,31 +28,41 @@ interface SuperadminStats {
   error?: string;
 }
 
+async function fetchStats(): Promise<SuperadminStats> {
+  try {
+    const res = await fetch('/api/superadmin/stats');
+    if (!res.ok) {
+      return { connected: false, error: 'No se pudo consultar el estado de la base de datos.' };
+    }
+    const json: SuperadminStats = await res.json();
+    return json;
+  } catch {
+    return { connected: false, error: 'Error de red al consultar MongoDB.' };
+  }
+}
+
 export default function DatabaseOverview() {
   const [data, setData] = useState<SuperadminStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  async function loadStats(isManual = false) {
-    if (isManual) setRefreshing(true);
-    try {
-      const res = await fetch('/api/superadmin/stats');
-      if (res.ok) {
-        const json = await res.json();
-        setData(json);
-      } else {
-        setData({ connected: false, error: 'No se pudo consultar el estado de la base de datos.' });
-      }
-    } catch {
-      setData({ connected: false, error: 'Error de red al consultar MongoDB.' });
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
+  async function loadStats() {
+    setRefreshing(true);
+    const result = await fetchStats();
+    setData(result);
+    setRefreshing(false);
   }
 
   useEffect(() => {
-    loadStats();
+    let isMounted = true;
+    fetchStats().then((result) => {
+      if (!isMounted) return;
+      setData(result);
+      setLoading(false);
+    });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -88,7 +98,7 @@ export default function DatabaseOverview() {
 
         <button
           type="button"
-          onClick={() => loadStats(true)}
+          onClick={loadStats}
           disabled={loading || refreshing}
           className="btn-ghost text-xs px-3.5 py-2 self-start sm:self-center flex items-center gap-2"
         >
