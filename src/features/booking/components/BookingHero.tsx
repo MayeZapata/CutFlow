@@ -8,7 +8,7 @@ import { ClockIcon, ShieldIcon, StarIcon } from '@/components/ui/icons';
 const HIGHLIGHTS = [
   { icon: ShieldIcon, label: 'Sin choques de horario' },
   { icon: ClockIcon, label: 'Confirmación al instante' },
-  { icon: StarIcon, label: 'Barberos 4.8★ en promedio' },
+  { icon: StarIcon, label: 'Barberos 4.8 de promedio' },
 ] as const;
 
 export default function BookingHero() {

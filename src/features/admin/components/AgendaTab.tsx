@@ -293,10 +293,10 @@ export default function AgendaTab({
 
                     <div className="flex flex-wrap items-center gap-3 text-xs text-muted mt-1.5">
                       <span className="text-gold-soft font-medium">
-                        💈 {getBarberName(apt.barberId)}
+                        {getBarberName(apt.barberId)}
                       </span>
                       <span>•</span>
-                      <span>✂️ {s?.name || 'Servicio'} ({s?.durationMinutes || 30} min)</span>
+                      <span>{s?.name || 'Servicio'} ({s?.durationMinutes || 30} min)</span>
                       <span>•</span>
                       <span className="text-cream font-semibold">
                         {s ? formatCop(s.priceCop) : ''}

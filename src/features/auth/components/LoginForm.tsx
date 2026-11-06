@@ -177,7 +177,7 @@ export default function LoginForm() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-cream text-xs"
                 tabIndex={-1}
               >
-                {showPassword ? '🙈' : '👁️'}
+                {showPassword ? 'Ocultar' : 'Ver'}
               </button>
             </div>
           </div>

@@ -70,7 +70,7 @@ export default function RescheduleModal({ state, onClose, onSuccess }: Reschedul
           aria-label="Cerrar modal"
           className="absolute top-4 right-4 text-muted hover:text-cream text-xl p-1 rounded-lg"
         >
-          ✕
+          &times;
         </button>
 
         <div className="flex items-center gap-2 text-gold text-xs font-semibold tracking-wider uppercase mb-1">

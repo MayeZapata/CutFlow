@@ -82,7 +82,7 @@ export default function StressLab() {
               : 'border border-line bg-surface-2/60 text-muted hover:border-gold/40 hover:text-cream'
           }`}
         >
-          <span>⚡</span>
+          <span>CPU</span>
           <span>Motor P: Intervalos (O(n log n) vs O(n²))</span>
         </button>
 
@@ -95,7 +95,7 @@ export default function StressLab() {
               : 'border border-line bg-surface-2/60 text-muted hover:border-gold/40 hover:text-cream'
           }`}
         >
-          <span>🧩</span>
+          <span>NP</span>
           <span>Problemas NP y NP-Completos (Subset Sum & 3-Coloring)</span>
         </button>
       </div>
@@ -159,7 +159,7 @@ export default function StressLab() {
             disabled={loading}
             className="btn-primary shrink-0"
           >
-            {loading ? 'Ejecutando en CPU...' : '▶ Ejecutar prueba'}
+            {loading ? 'Ejecutando en CPU...' : 'Ejecutar prueba'}
           </button>
         </div>
 
@@ -243,7 +243,7 @@ export default function StressLab() {
                 </div>
               ) : (
                 <div className="rounded-3xl border border-dashed border-line bg-surface-2/30 p-8 flex flex-col items-center justify-center text-center text-sm text-muted h-[500px]">
-                  <span className="text-3xl mb-2">📊</span>
+                  
                   <p className="font-medium text-cream/90">Gráfica en tiempo real</p>
                   <p className="mt-1 text-xs text-muted max-w-xs">
                     Ejecuta una prueba arriba para ver las barras comparativas de latencia en CPU.

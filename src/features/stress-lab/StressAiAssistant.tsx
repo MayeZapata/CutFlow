@@ -147,8 +147,8 @@ export default function StressAiAssistant({
       id: 'welcome',
       role: 'assistant',
       content: result
-        ? `¡Hola! 👋 Ya tengo los datos de la prueba con **${result.volume.toLocaleString('es-CO')} solicitudes**. Estoy preparando una explicación tranquila y clara de lo que pasó...`
-        : '¡Hola! 👋 Soy tu compañero de CutFlow acá en Colombia. En cuanto ejecutes una prueba de estrés arriba, te explicaré con toda la calma y sin enredos técnicos qué significan estos números para tu barbería. Y si te queda cualquier duda, ¡la charlamos por aquí con todo el gusto!',
+        ? `¡Hola! Ya tengo los datos de la prueba con **${result.volume.toLocaleString('es-CO')} solicitudes**. Estoy preparando una explicación tranquila y clara de lo que pasó...`
+        : '¡Hola! Soy tu compañero de CutFlow acá en Colombia. En cuanto ejecutes una prueba de estrés arriba, te explicaré con toda la calma y sin enredos técnicos qué significan estos números para tu barbería. Y si te queda cualquier duda, ¡la charlamos por aquí con todo el gusto!',
       timestamp: 'Ahora',
     },
   ]);
@@ -201,7 +201,7 @@ REGLA DE ORO DE VOCABULARIO: Estamos en Colombia. Comunícate en español colomb
           const autoMessage: Message = {
             id: createMsgId('auto-analysis'),
             role: 'assistant',
-            content: `### ☕ Explicación de tu Prueba de Estrés (${result?.volume.toLocaleString('es-CO')} solicitudes)\n\n${data.reply}\n\n---\n*💬 Si algo no te quedó 100% claro o quieres revisar cualquier detalle, ¡escríbeme aquí abajo y lo charlamos con todo el gusto!*`,
+            content: `### Explicación de tu Prueba de Estrés (${result?.volume.toLocaleString('es-CO')} solicitudes)\n\n${data.reply}\n\n---\n*Si algo no te quedó 100% claro o quieres revisar cualquier detalle, ¡escríbeme aquí abajo y lo charlamos con todo el gusto!*`,
             timestamp: 'Gemini',
           };
           setMessages((prev) => [...prev, autoMessage]);
@@ -399,7 +399,7 @@ REGLA DE ORO DE VOCABULARIO: Estamos en Colombia. Comunícate en español colomb
               onClick={() => handleSend(suggestion)}
               className="text-left text-[11px] rounded-lg border border-line bg-surface-2/60 px-2.5 py-1 text-cream/90 transition hover:border-gold/60 hover:bg-gold/10 hover:text-gold active:scale-95 disabled:opacity-50"
             >
-              💬 {suggestion}
+              {suggestion}
             </button>
           ))}
         </div>

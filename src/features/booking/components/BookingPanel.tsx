@@ -498,7 +498,7 @@ export default function BookingPanel() {
           {!user ? (
             <div className="mt-6 space-y-3">
               <div className="rounded-xl border border-gold/30 bg-gold/10 p-3 text-xs text-cream flex items-center justify-between">
-                <span>💡 Debes iniciar sesión para confirmar tu cita.</span>
+                <span>Debes iniciar sesión para confirmar tu cita.</span>
                 <Link
                   href="/login?returnTo=/#reserva"
                   className="text-gold font-semibold underline hover:text-gold-soft ml-2 shrink-0"

@@ -146,7 +146,7 @@ export default function NpLab() {
               : 'border border-line bg-surface-2/60 text-muted hover:border-gold/40 hover:text-cream'
           }`}
         >
-          <span>💈</span>
+          <span></span>
           <span>2. Estaciones sin Conflicto (3-Coloring)</span>
         </button>
       </div>
@@ -236,11 +236,11 @@ export default function NpLab() {
               <div className="mt-3">
                 {currentSelectionSum === targetMinutes ? (
                   <span className="inline-flex items-center gap-1 rounded-full bg-success/15 px-3 py-1 text-xs font-semibold text-success border border-success/30">
-                    ✓ Suma exacta alcanzada (75 min)
+                    Suma exacta alcanzada (75 min)
                   </span>
                 ) : currentSelectionSum > targetMinutes ? (
                   <span className="inline-flex items-center gap-1 rounded-full bg-danger/15 px-3 py-1 text-xs font-semibold text-danger border border-danger/30">
-                    ⚠ Se excede por {currentSelectionSum - targetMinutes} minutos
+                    Se excede por {currentSelectionSum - targetMinutes} minutos
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold text-gold border border-gold/30">
@@ -280,7 +280,7 @@ export default function NpLab() {
                           isSelected ? 'border-gold bg-gold text-night' : 'border-line bg-surface text-muted'
                         }`}
                       >
-                        {isSelected ? '✓' : ''}
+                        {isSelected ? '·' : ''}
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-cream">{s.name}</p>
@@ -307,7 +307,7 @@ export default function NpLab() {
               onClick={handleVerifySubset}
               className="btn-ghost text-xs"
             >
-              <span>🔍</span>
+              <span></span>
               <span>1. Verificar propuesta manual (O(k) - Tiempo Polinomial NP)</span>
             </button>
 
@@ -316,7 +316,7 @@ export default function NpLab() {
               onClick={handleSolveSubsetDP}
               className="btn-primary text-xs"
             >
-              <span>⚡</span>
+              <span></span>
               <span>2. Resolver óptimo con CutFlow (Programación Dinámica O(n·W))</span>
             </button>
           </div>
@@ -333,8 +333,8 @@ export default function NpLab() {
               <div className="flex items-center justify-between font-semibold">
                 <span>
                   {verificationResult.isValid
-                    ? '✅ Propuesta válida: La combinación suma exactamente los minutos requeridos.'
-                    : `❌ Propuesta rechazada: Suma ${verificationResult.totalDuration} min (diferencia de ${Math.abs(
+                    ? 'Propuesta válida: La combinación suma exactamente los minutos requeridos.'
+                    : `Propuesta rechazada: Suma ${verificationResult.totalDuration} min (diferencia de ${Math.abs(
                         verificationResult.diffMinutes
                       )} min).`}
                 </span>
@@ -353,7 +353,7 @@ export default function NpLab() {
           {dpResult && dpResult.found && (
             <div className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-xs text-cream">
               <div className="flex items-center justify-between font-semibold text-gold">
-                <span>⚡ Solución óptima calculada por CutFlow en {dpResult.executionTimeMs} ms</span>
+                <span>Solución óptima calculada por CutFlow en {dpResult.executionTimeMs} ms</span>
                 <span className="text-[11px] font-mono text-muted">
                   Espacio evaluado por fuerza bruta: {dpResult.subsetsExploredEstimate} combinaciones
                 </span>
@@ -398,7 +398,7 @@ export default function NpLab() {
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {DEFAULT_CONFLICTS.map((c, i) => (
                 <div key={i} className="flex items-center gap-2 rounded-xl border border-line bg-surface/60 p-2.5 text-xs">
-                  <span className="text-danger font-bold shrink-0">⚡ {c.serviceA} ↔ {c.serviceB}</span>
+                  <span className="text-danger font-bold shrink-0">{c.serviceA} ↔ {c.serviceB}</span>
                   <span className="text-[11px] text-muted truncate">{c.reason}</span>
                 </div>
               ))}
@@ -507,7 +507,7 @@ export default function NpLab() {
               onClick={handleVerifyGraph}
               className="btn-ghost text-xs"
             >
-              <span>🔍</span>
+              <span></span>
               <span>1. Validar conflictos en sillones (O(E) - Verificación NP)</span>
             </button>
 
@@ -516,7 +516,7 @@ export default function NpLab() {
               onClick={handleSolveGraphAuto}
               className="btn-primary text-xs"
             >
-              <span>💈</span>
+              <span></span>
               <span>2. Distribuir automáticamente con Backtracking (NP-Completo)</span>
             </button>
           </div>
@@ -533,8 +533,8 @@ export default function NpLab() {
               <div className="flex items-center justify-between font-semibold">
                 <span>
                   {graphVerification.isValid
-                    ? '✅ Asignación válida: Ninguna pareja con conflicto comparte el mismo sillón.'
-                    : `❌ Colisión detectada: Hay ${graphVerification.conflictViolations.length} conflicto(s) en la misma estación.`}
+                    ? 'Asignación válida: Ninguna pareja con conflicto comparte el mismo sillón.'
+                    : `Colisión detectada: Hay ${graphVerification.conflictViolations.length} conflicto(s) en la misma estación.`}
                 </span>
                 <span className="text-[11px] font-mono text-muted">
                   Tiempo: {graphVerification.executionTimeMs} ms

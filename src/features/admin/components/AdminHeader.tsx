@@ -38,11 +38,11 @@ export default function AdminHeader({
     onSelectDate(`${yyyy}-${mm}-${dd}`);
   }
 
-  const tabs: { id: AdminTab; label: string; icon: string; count?: number }[] = [
-    { id: 'agenda', label: 'Agenda del Día', icon: '📅', count: totalAppointments },
-    { id: 'metrics', label: 'Métricas de Sede', icon: '📊' },
-    { id: 'barbers', label: 'Equipo de Barberos', icon: '💈' },
-    { id: 'services', label: 'Servicios y Precios', icon: '✂️' },
+  const tabs: { id: AdminTab; label: string; count?: number }[] = [
+    { id: 'agenda', label: 'Agenda del Día', count: totalAppointments },
+    { id: 'metrics', label: 'Métricas de Sede' },
+    { id: 'barbers', label: 'Equipo de Barberos' },
+    { id: 'services', label: 'Servicios y Precios' },
   ];
 
   return (
@@ -91,7 +91,7 @@ export default function AdminHeader({
               aria-label="Día anterior"
               className="px-2.5 py-1.5 text-xs text-muted hover:text-cream rounded-lg hover:bg-surface transition"
             >
-              ◀
+              &lsaquo;
             </button>
 
             <div className="flex items-center gap-1.5 px-2">
@@ -110,7 +110,7 @@ export default function AdminHeader({
               aria-label="Día siguiente"
               className="px-2.5 py-1.5 text-xs text-muted hover:text-cream rounded-lg hover:bg-surface transition"
             >
-              ▶
+              &rsaquo;
             </button>
           </div>
 
@@ -155,7 +155,6 @@ export default function AdminHeader({
                       : 'text-muted hover:text-cream hover:bg-surface-2/60'
                   }`}
                 >
-                  <span>{tab.icon}</span>
                   <span>{tab.label}</span>
                   {typeof tab.count === 'number' && (
                     <span
