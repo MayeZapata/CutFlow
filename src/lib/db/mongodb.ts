@@ -3,7 +3,8 @@ import { LocationModel, BarberModel, ServiceModel, AppointmentModel, UserModel }
 import { SEED_LOCATIONS, SEED_BARBERS, SEED_SERVICES, SEED_APPOINTMENTS, SEED_USERS } from './seed';
 import { hashPassword } from '../auth/password';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/barber_db';
+// trim(): protects against stray whitespace/newlines pasted into hosting env vars
+const MONGODB_URI = process.env.MONGODB_URI?.trim() || 'mongodb://localhost:27017/barber_db';
 
 interface MongooseCache {
   conn: typeof mongoose | null;
