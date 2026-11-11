@@ -18,9 +18,9 @@ interface StressResult {
   runId?: number;
 }
 
-const MAX_VOLUME = 7_000_000;
+const MAX_VOLUME = 6_000_000;
 const MIN_VOLUME = 100;
-const PRESET_LOAD_OPTIONS = [10000, 50000, 100000, 250000, 500000, 1000000, 3000000, 5000000, 7000000] as const;
+const PRESET_LOAD_OPTIONS = [10000, 50000, 100000, 250000, 500000, 1000000, 3000000, 5000000] as const;
 
 function isStressResult(data: unknown): data is StressResult {
   if (typeof data !== 'object' || data === null) return false;

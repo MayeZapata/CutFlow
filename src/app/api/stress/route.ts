@@ -78,7 +78,7 @@ function runLogN(candidates: CandidateRequest[]): { assigned: number; collisions
       const mid = Math.floor((low + high) / 2);
       const ex = list[mid];
 
-      // Verificación de intervalo: ¿chocan los horarios?
+      // Verificación de intervalo
       if (!(cand.end <= ex.start || cand.start >= ex.end)) {
         conflict = true;
         break;
@@ -104,7 +104,7 @@ function runLogN(candidates: CandidateRequest[]): { assigned: number; collisions
   return { assigned, collisions, timeMs };
 }
 
-const MAX_VOLUME = 7_000_000;
+const MAX_VOLUME = 6_000_000;
 
 export async function POST(request: NextRequest) {
   try {
