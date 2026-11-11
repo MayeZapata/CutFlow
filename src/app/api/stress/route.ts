@@ -104,7 +104,7 @@ function runLogN(candidates: CandidateRequest[]): { assigned: number; collisions
   return { assigned, collisions, timeMs };
 }
 
-const MAX_VOLUME = 6_000_000;
+const MAX_VOLUME = 7_000_000;
 
 export async function POST(request: NextRequest) {
   try {
